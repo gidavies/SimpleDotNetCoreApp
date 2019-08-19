@@ -67,7 +67,7 @@ stages:
         vmImage: 'ubuntu-latest'
       variables:
         WebAppName: 'ColinsYAMLDemoDev'
-      environment: dev
+      environment: Dev
       strategy:
         runOnce:
           deploy:
