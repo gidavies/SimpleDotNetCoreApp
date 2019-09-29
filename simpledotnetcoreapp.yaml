@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simpledotnetcoreapp
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: simpledotnetcoreapp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simpledotnetcoreapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: simpledotnetcoreapp
+  template:
+    metadata:
+      labels:
+        app: simpledotnetcoreapp
+    spec:
+      containers:
+      - name: simpledotnetcoreapp
+        image: colinsaksdemoacr.azurecr.io/simpledotnetcoreapp:v1
+        ports:
+        - containerPort: 80
