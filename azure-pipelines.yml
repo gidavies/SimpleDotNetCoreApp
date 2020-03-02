@@ -8,7 +8,8 @@ trigger:
 
 variables:
   buildConfiguration: 'Release'
-  DemoResourceGroupName: 'ColinsDemoRG'
+  DemoResourceGroupName: 'GilesDemoRG'
+  AzureSub: 'Azure On Line Services(2482da3d-7516-4b32-9057-d311caa99664)'
 
 #pool:
 #  vmImage: 'ubuntu-latest'
@@ -66,7 +67,7 @@ stages:
       pool:
         vmImage: 'ubuntu-latest'
       variables:
-        WebAppName: 'ColinsYAMLDemoDev'
+        WebAppName: 'GilesYAMLDemoDev'
       environment: Dev
       strategy:
         runOnce:
@@ -79,7 +80,7 @@ stages:
                   targetPath: '$(System.ArtifactsDirectory)/drop'
               - task: AzureResourceGroupDeployment@2
                 inputs:
-                  azureSubscription: 'Colin Beales MSDN(7e006c82-4480-45f0-93c2-502b8f4f757a)'
+                  azureSubscription: '$(AzureSub)'
                   action: 'Create Or Update Resource Group'
                   resourceGroupName: '$(DemoResourceGroupName)'
                   location: 'North Europe'
@@ -90,7 +91,7 @@ stages:
                   deploymentMode: 'Incremental'
               - task: AzureWebApp@1
                 inputs:
-                  azureSubscription: 'Colin Beales MSDN(7e006c82-4480-45f0-93c2-502b8f4f757a)'
+                  azureSubscription: '$(AzureSub)'
                   appType: 'webApp'
                   appName: '$(WebAppName)'
                   package: '$(System.ArtifactsDirectory)/**/*.zip'
@@ -103,7 +104,7 @@ stages:
       pool:
         vmImage: 'ubuntu-latest'
       variables:
-        WebAppName: 'ColinsYAMLDemoQA'
+        WebAppName: 'GilesYAMLDemoQA'
       environment: QA
       strategy:
         runOnce:
@@ -116,7 +117,7 @@ stages:
                   targetPath: '$(System.ArtifactsDirectory)/drop'
               - task: AzureResourceGroupDeployment@2
                 inputs:
-                  azureSubscription: 'Colin Beales MSDN(7e006c82-4480-45f0-93c2-502b8f4f757a)'
+                  azureSubscription: '$(AzureSub)'
                   action: 'Create Or Update Resource Group'
                   resourceGroupName: '$(DemoResourceGroupName)'
                   location: 'North Europe'
@@ -127,7 +128,7 @@ stages:
                   deploymentMode: 'Incremental'
               - task: AzureWebApp@1
                 inputs:
-                  azureSubscription: 'Colin Beales MSDN(7e006c82-4480-45f0-93c2-502b8f4f757a)'
+                  azureSubscription: '$(AzureSub)'
                   appType: 'webApp'
                   appName: '$(WebAppName)'
                   package: '$(System.ArtifactsDirectory)/**/*.zip'
@@ -139,7 +140,7 @@ stages:
       pool:
         vmImage: 'ubuntu-latest'
       variables:
-        WebAppName: 'ColinsYAMLDemoProd'
+        WebAppName: 'GilesYAMLDemoProd'
       environment: Prod
       strategy:
         runOnce:
@@ -152,7 +153,7 @@ stages:
                   targetPath: '$(System.ArtifactsDirectory)/drop'
               - task: AzureResourceGroupDeployment@2
                 inputs:
-                  azureSubscription: 'Colin Beales MSDN(7e006c82-4480-45f0-93c2-502b8f4f757a)'
+                  azureSubscription: '$(AzureSub)'
                   action: 'Create Or Update Resource Group'
                   resourceGroupName: '$(DemoResourceGroupName)'
                   location: 'North Europe'
@@ -163,7 +164,7 @@ stages:
                   deploymentMode: 'Incremental'
               - task: AzureWebApp@1
                 inputs:
-                  azureSubscription: 'Colin Beales MSDN(7e006c82-4480-45f0-93c2-502b8f4f757a)'
+                  azureSubscription: '$(AzureSub)'
                   appType: 'webApp'
                   appName: '$(WebAppName)'
                   package: '$(System.ArtifactsDirectory)/**/*.zip'
